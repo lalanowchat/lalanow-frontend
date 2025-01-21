@@ -5,6 +5,7 @@ import { Input } from "@/components/ui/input"
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import Header from "@/components/Header"
+import { useTranslation } from 'react-i18next';
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import * as z from "zod"
@@ -16,6 +17,7 @@ export default function NeedHelp() {
   const [zipCode, setZipCode] = useState('')
   const [chosenCategory, setChosenCategory] = useState('')
   const [resources, setResources] = useState([])
+  const { t } = useTranslation();
 
 
   useEffect(() => {
@@ -55,16 +57,15 @@ export default function NeedHelp() {
   const getResources = async () => {
     const response = await axiosInstance.get(
       `/resources/need-help/by-zip?category=${chosenCategory}&zipcode=${zipCode}`)
-    console.log(response.data)
     setResources(response.data.resources)
   }
 
   return (
     <>
-      <Header title="LALA Now > I Need Help"/>
+      <Header title={`LaHelpNow > ${t("needhelp.need_help")}`} />
         <div className="p-4">
         <p className="text-muted-foreground mt-12 mb-4">
-        This search draws from <a href="https://docs.google.com/spreadsheets/u/1/d/1KMk34XY5dsvVJjAoD2mQUVHYU_Ib6COz6jcGH5uJWDY/htmlview#" className="text-primary hover:underline" target="_blank" rel="noopener noreferrer">MALAN Resources table</a>
+        {t('needhelp.this_search_draws')} <a href="https://docs.google.com/spreadsheets/u/1/d/1KMk34XY5dsvVJjAoD2mQUVHYU_Ib6COz6jcGH5uJWDY/htmlview#" className="text-primary hover:underline" target="_blank" rel="noopener noreferrer">{t('needhelp.MALAN_resources_table')}</a>
         </p>
         <div className="flex gap-4  mb-8">
           <Form {...form}>
@@ -82,7 +83,7 @@ export default function NeedHelp() {
                       <FormControl>
                       {/* Add TailwindCSS class to fix z-index */}
                       <SelectTrigger className="relative z-11 w-[180px]">
-                          <SelectValue placeholder="Choose Category" />
+                          <SelectValue placeholder={t("needhelp.choose_category")} />
                         </SelectTrigger>
                       </FormControl>
                       <SelectContent>
@@ -101,12 +102,12 @@ export default function NeedHelp() {
                 name="zipCode"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Zip Code</FormLabel>
+                    <FormLabel>{t("needhelp.zip_code")} </FormLabel>
                     <FormControl>
                       <Input {...field} onChange={(e) => {
                         setZipCode(e.target.value);
                         field.onChange(e);
-                      }} placeholder="Zip Code" />
+                      }} placeholder={t("needhelp.zip_code")} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -114,22 +115,21 @@ export default function NeedHelp() {
               />
 
               <Button type="submit">
-                Search
+                {t('needhelp.search')} 
               </Button>
             </form>
           </Form>
         </div>
         {/* Add a lower z-index to the map */}
         <div id="map" className="relative z-10">
-          <h1>Map of Los Angeles</h1>
           <MapComponent resources={resources} />
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {resources?.length === 0 ? (
             <Card>
               <CardHeader>
-                <CardTitle>No Results</CardTitle>
-                <CardDescription>No resources found for this category and area.</CardDescription>
+                <CardTitle>{t('needhelp.no_results')}</CardTitle>
+                <CardDescription>{t('needhelp.no_resources_found')}</CardDescription>
               </CardHeader>
             </Card>
           ) : (

@@ -26,10 +26,8 @@ const MapComponent = ({ resources }) => {
   useEffect(() => {
     // Update markers when resources change
     if (markersLayerRef.current) {
-      // Log resources for debugging
-      console.log('Updating markers with resources:', resources);
-
       markersLayerRef.current.clearLayers();
+      
       resources
       .filter((resource) => resource.lat !== undefined && resource.long !== undefined) // Validate lat and lng
       .forEach((resource) => {

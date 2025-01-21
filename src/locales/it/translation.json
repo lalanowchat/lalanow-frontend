@@ -1,0 +1,21 @@
+{
+    "header": {
+      "title": "LaHelpNow",
+      "needHelp": "Ho bisogno di aiuto (risorse)",
+      "wantToHelp": "Voglio aiutare (volontariato e luoghi di donazione)"
+    },
+    "needhelp": {
+      "need_help": "Ho Bisogno di Aiuto",
+      "this_search_draws": "Questa ricerca utilizza",
+      "MALAN_resources_table": "Tabella delle risorse MALAN",
+      "zip_code": "Codice Postale",
+      "choose_category": "Scegli la categoria",
+      "search": "Cerca",
+      "no_results": "Nessun risultato",
+      "no_resources_found": "Nessuna risorsa trovata per questa categoria e area."
+    },
+    "chatbot": {
+      "get_and_give_help": "Ricevi e offri aiuto durante gli incendi in California"
+    }
+  }
+  

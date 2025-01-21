@@ -1,0 +1,21 @@
+{
+    "header": {
+      "title": "LaHelpNow",
+      "needHelp": "Tôi cần giúp đỡ (nguồn tài nguyên)",
+      "wantToHelp": "Tôi muốn giúp đỡ (địa điểm tình nguyện và quyên góp)"
+    },
+    "needhelp": {
+      "need_help": "Tôi Cần Giúp Đỡ",
+      "this_search_draws": "Tìm kiếm này được lấy từ",
+      "MALAN_resources_table": "Bảng tài nguyên MALAN",
+      "zip_code": "Mã Bưu Chính",
+      "choose_category": "Chọn Danh Mục",
+      "search": "Tìm kiếm",
+      "no_results": "Không có kết quả",
+      "no_resources_found": "Không tìm thấy tài nguyên cho danh mục và khu vực này."
+    },
+    "chatbot": {
+      "get_and_give_help": "Nhận và cung cấp trợ giúp trong thời gian cháy rừng tại California"
+    }
+  }
+  
