@@ -9,7 +9,7 @@ import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import * as z from "zod"
 import { Form, FormControl, FormField, FormItem, FormMessage, FormLabel } from "@/components/ui/form"
-
+import MapComponent from '@/components/MapComponent';
 
 export default function NeedHelp() {
   const [categories, setCategories] = useState([])
@@ -80,7 +80,8 @@ export default function NeedHelp() {
                       field.onChange(value);
                     }}>
                       <FormControl>
-                        <SelectTrigger className="w-[180px]">
+                      {/* Add TailwindCSS class to fix z-index */}
+                      <SelectTrigger className="relative z-11 w-[180px]">
                           <SelectValue placeholder="Choose Category" />
                         </SelectTrigger>
                       </FormControl>
@@ -118,7 +119,11 @@ export default function NeedHelp() {
             </form>
           </Form>
         </div>
-
+        {/* Add a lower z-index to the map */}
+        <div id="map" className="relative z-10">
+          <h1>Map of Los Angeles</h1>
+          <MapComponent resources={resources} />
+        </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {resources?.length === 0 ? (
             <Card>
