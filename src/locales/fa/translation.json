@@ -1,0 +1,21 @@
+{
+    "header": {
+      "title": "LaHelpNow",
+      "needHelp": "من به کمک نیاز دارم (منابع)",
+      "wantToHelp": "می‌خواهم کمک کنم (محل‌های داوطلبی و اهدای کمک)"
+    },
+    "needhelp": {
+      "need_help": "من به کمک نیاز دارم",
+      "this_search_draws": "این جستجو از",
+      "MALAN_resources_table": "جدول منابع MALAN",
+      "choose_location": "مکان را انتخاب کنید",
+      "choose_category": "دسته‌بندی را انتخاب کنید",
+      "search": "جستجو",
+      "no_results": "نتیجه‌ای یافت نشد",
+      "no_resources_found": "هیچ منبعی برای این دسته و منطقه یافت نشد."
+    },
+    "chatbot": {
+      "get_and_give_help": "در طول آتش‌سوزی‌های کالیفرنیا کمک بگیرید و کمک کنید"
+    }
+  }
+  

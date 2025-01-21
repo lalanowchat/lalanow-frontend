@@ -1,0 +1,21 @@
+{
+    "header": {
+      "title": "LaHelpNow",
+      "needHelp": "Ich brauche Hilfe (Ressourcen)",
+      "wantToHelp": "Ich möchte helfen (Freiwilligenarbeit und Spendenorte)"
+    },
+    "needhelp": {
+      "need_help": "Ich Brauche Hilfe",
+      "this_search_draws": "Diese Suche zieht aus",
+      "MALAN_resources_table": "MALAN Ressourcen-Tabelle",
+      "choose_location": "Standort auswählen",
+      "choose_category": "Kategorie auswählen",
+      "search": "Suchen",
+      "no_results": "Keine Ergebnisse",
+      "no_resources_found": "Keine Ressourcen für diese Kategorie und Region gefunden."
+    },
+    "chatbot": {
+      "get_and_give_help": "Hilfe erhalten und geben während der Waldbrände in Kalifornien"
+    }
+  }
+  

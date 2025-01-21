@@ -4,6 +4,7 @@ import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from "@
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import Header from "@/components/Header"
+import { useTranslation } from 'react-i18next';
 
 export default function NeedHelp() {
   const [locations, setLocations] = useState([])
@@ -11,6 +12,7 @@ export default function NeedHelp() {
   const [chosenLocation, setChosenLocation] = useState('')
   const [chosenCategory, setChosenCategory] = useState('')
   const [resources, setResources] = useState([])
+  const { t } = useTranslation();
 
 
   useEffect(() => {
@@ -37,15 +39,15 @@ export default function NeedHelp() {
 
   return (
     <>
-      <Header title="LALA Now > I Need Help"/>
+      <Header title={`LaHelpNow > ${t("needhelp.need_help")}`} />
         <div className="p-4">
         <p className="text-muted-foreground mt-12 mb-4">
-        This search draws from <a href="https://docs.google.com/spreadsheets/u/1/d/1KMk34XY5dsvVJjAoD2mQUVHYU_Ib6COz6jcGH5uJWDY/htmlview#" className="text-primary hover:underline" target="_blank" rel="noopener noreferrer">MALAN Resources table</a>
+        {t('needhelp.this_search_draws')} <a href="https://docs.google.com/spreadsheets/u/1/d/1KMk34XY5dsvVJjAoD2mQUVHYU_Ib6COz6jcGH5uJWDY/htmlview#" className="text-primary hover:underline" target="_blank" rel="noopener noreferrer">{t('needhelp.MALAN_resources_table')}</a>
         </p>
         <div className="flex gap-4  mb-8">
           <Select value={chosenLocation} onValueChange={setChosenLocation}>
             <SelectTrigger className="w-[180px]">
-              <SelectValue placeholder="Choose Location" />
+              <SelectValue placeholder={t("needhelp.choose_location")} />
             </SelectTrigger>
             <SelectContent>
               {locations.map((location, index) => (
@@ -56,7 +58,7 @@ export default function NeedHelp() {
 
           <Select value={chosenCategory} onValueChange={setChosenCategory}>
             <SelectTrigger className="w-[180px]">
-              <SelectValue placeholder="Choose Category" />
+              <SelectValue placeholder={t("needhelp.choose_category")}/>
             </SelectTrigger>
             <SelectContent>
               {categories.map((category, index) => (
@@ -68,7 +70,7 @@ export default function NeedHelp() {
           <Button onClick={() => {
             getResources()
           }}>
-            Search
+            {t('needhelp.search')} 
           </Button>
         </div>
 
@@ -76,8 +78,8 @@ export default function NeedHelp() {
           {resources?.length === 0 ? (
             <Card>
               <CardHeader>
-                <CardTitle>No Results</CardTitle>
-                <CardDescription>No resources found for this category and area.</CardDescription>
+                <CardTitle>{t('needhelp.no_results')}</CardTitle>
+                <CardDescription>{t('needhelp.no_resources_found')}</CardDescription>
               </CardHeader>
             </Card>
           ) : (

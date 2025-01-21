@@ -1,0 +1,21 @@
+{
+    "header": {
+      "title": "LaHelpNow",
+      "needHelp": "Kailangan ko ng tulong (mga mapagkukunan)",
+      "wantToHelp": "Gusto kong tumulong (volunteer at lokasyon ng donasyon)"
+    },
+    "needhelp": {
+      "need_help": "Kailangan Ko ng Tulong",
+      "this_search_draws": "Ang paghahanap na ito ay kumukuha mula sa",
+      "MALAN_resources_table": "MALAN_resources_table",
+      "choose_location": "Piliin ang Lokasyon",
+      "choose_category": "Piliin ang Kategorya",
+      "search": "Maghanap",
+      "no_results": "Walang Resulta",
+      "no_resources_found": "Walang nahanap na mapagkukunan para sa kategorya at lugar na ito."
+    },
+    "chatbot": {
+      "get_and_give_help": "Humingi at magbigay ng tulong sa panahon ng California Wildfires"
+    }
+  }
+  
