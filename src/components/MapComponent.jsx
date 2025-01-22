@@ -2,6 +2,17 @@ import React, { useEffect, useRef } from 'react';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 
+// Fix marker icons for production
+import markerIcon2x from 'leaflet/dist/images/marker-icon-2x.png';
+import markerIcon from 'leaflet/dist/images/marker-icon.png';
+import markerShadow from 'leaflet/dist/images/marker-shadow.png';
+
+L.Icon.Default.mergeOptions({
+  iconRetinaUrl: markerIcon2x,
+  iconUrl: markerIcon,
+  shadowUrl: markerShadow,
+});
+
 const MapComponent = ({ resources }) => {
   const mapRef = useRef(null);
   const markersLayerRef = useRef(null);
@@ -27,13 +38,13 @@ const MapComponent = ({ resources }) => {
     // Update markers when resources change
     if (markersLayerRef.current) {
       markersLayerRef.current.clearLayers();
-      
+
       resources
       .filter((resource) => resource.lat !== undefined && resource.long !== undefined) // Validate lat and lng
       .forEach((resource) => {
         const marker = L.marker([resource.lat, resource.long]);
         marker.bindPopup(
-          `<strong>${resource.name || 'Unknown Name'}</strong><br>${resource.address || 'Unknown Address'}`
+          `<strong>${resource.name || 'Unknown Name'}</strong><br>${resource.address || 'Unknown Address'}<br><br>${resource.providing || 'Providing Unknown'}`
         );
         markersLayerRef.current.addLayer(marker);
       });
