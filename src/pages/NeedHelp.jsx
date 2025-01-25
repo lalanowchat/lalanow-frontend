@@ -63,32 +63,50 @@ export default function NeedHelp() {
   return (
     <>
       <Header title={`LaHelpNow > ${t("needhelp.need_help")}`} />
-        <div className="p-4">
-        <p className="text-muted-foreground mt-12 mb-4">
-        {t('needhelp.this_search_draws')} <a href="https://docs.google.com/spreadsheets/u/1/d/1KMk34XY5dsvVJjAoD2mQUVHYU_Ib6COz6jcGH5uJWDY/htmlview#" className="text-primary hover:underline" target="_blank" rel="noopener noreferrer">{t('needhelp.MALAN_resources_table')}</a>
+      <div className="p-4">
+        {/* Information Section */}
+        <p className="text-muted-foreground mt-12 mb-4 text-sm md:text-base">
+          {t('needhelp.this_search_draws')}{' '}
+          <a
+            href="https://docs.google.com/spreadsheets/u/1/d/1KMk34XY5dsvVJjAoD2mQUVHYU_Ib6COz6jcGH5uJWDY/htmlview#"
+            className="text-primary hover:underline"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            {t('needhelp.MALAN_resources_table')}
+          </a>
         </p>
-        <div className="flex gap-4  mb-8">
+  
+        {/* Form Section */}
+        <div className="flex flex-col md:flex-row gap-4 mb-8">
           <Form {...form}>
-            <form onSubmit={form.handleSubmit(getResources)} className="flex gap-4">
+            <form
+              onSubmit={form.handleSubmit(getResources)}
+              className="flex flex-col md:flex-row gap-4 w-full"
+            >
+              {/* Help Category */}
               <FormField
                 control={form.control}
                 name="category"
                 render={({ field }) => (
-                  <FormItem>
+                  <FormItem className="text-left">
                     <FormLabel>Help Category</FormLabel>
-                    <Select onValueChange={(value) => {
-                      setChosenCategory(value);
-                      field.onChange(value);
-                    }}>
+                    <Select
+                      onValueChange={(value) => {
+                        setChosenCategory(value);
+                        field.onChange(value);
+                      }}
+                    >
                       <FormControl>
-                      {/* Add TailwindCSS class to fix z-index */}
-                      <SelectTrigger className="relative z-11 w-[180px]">
+                        <SelectTrigger className="relative z-11 w-full md:w-[180px]">
                           <SelectValue placeholder={t("needhelp.choose_category")} />
                         </SelectTrigger>
                       </FormControl>
                       <SelectContent>
                         {categories.map((category, index) => (
-                          <SelectItem key={index} value={category}>{category}</SelectItem>
+                          <SelectItem key={index} value={category}>
+                            {category}
+                          </SelectItem>
                         ))}
                       </SelectContent>
                     </Select>
@@ -96,34 +114,43 @@ export default function NeedHelp() {
                   </FormItem>
                 )}
               />
-
+  
+              {/* ZIP Code */}
               <FormField
                 control={form.control}
                 name="zipCode"
                 render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>{t("needhelp.zip_code")} </FormLabel>
+                  <FormItem className="text-left">
+                    <FormLabel>{t("needhelp.zip_code")}</FormLabel>
                     <FormControl>
-                      <Input {...field} onChange={(e) => {
-                        setZipCode(e.target.value);
-                        field.onChange(e);
-                      }} placeholder={t("needhelp.zip_code")} />
+                      <Input
+                        {...field}
+                        onChange={(e) => {
+                          setZipCode(e.target.value);
+                          field.onChange(e);
+                        }}
+                        placeholder={t("needhelp.zip_code")}
+                      />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
                 )}
               />
-
-              <Button type="submit">
-                {t('needhelp.search')} 
+  
+              {/* Search Button */}
+              <Button type="submit" className="w-full md:w-auto">
+                {t('needhelp.search')}
               </Button>
             </form>
           </Form>
         </div>
-        {/* Add a lower z-index to the map */}
-        <div id="map" className="relative z-10">
+  
+        {/* Map Section */}
+        <div id="map" className="relative z-10 mb-8 w-full h-[300px] md:h-[400px] lg:h-[500px]">
           <MapComponent resources={resources} />
         </div>
+  
+        {/* Resource Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {resources?.length === 0 ? (
             <Card>
@@ -134,14 +161,18 @@ export default function NeedHelp() {
             </Card>
           ) : (
             resources?.map((resource, index) => (
-              <Card key={index}>
+              <Card key={index} className="shadow-md">
                 <CardHeader>
                   <div className="flex justify-between items-start">
                     <div>
                       <CardTitle>{resource.name}</CardTitle>
                       <CardDescription>{resource.address}</CardDescription>
                     </div>
-                    {zipCode && <span className="font-bold text-blue-500">{resource.distance.toFixed(1)} miles</span>}
+                    {zipCode && (
+                      <span className="font-bold text-blue-500">
+                        {resource.distance.toFixed(1)} miles
+                      </span>
+                    )}
                   </div>
                 </CardHeader>
                 <CardContent>
@@ -153,5 +184,5 @@ export default function NeedHelp() {
         </div>
       </div>
     </>
-  )
+  );  
 }
