@@ -9,7 +9,7 @@ export default function Header({ title }) {
   };
 
   return (
-    <div className="fixed top-0 left-0 right-0 z-20 border-b bg-background/95 backdrop-blur-lg shadow-md">
+    <div className="top-0 left-0 right-0 z-20 border-b bg-background/95 backdrop-blur-lg shadow-md">
       <nav className="flex items-center justify-between h-16 px-6 md:px-16">
         <div className="text-2xl font-semibold text-black tracking-tight">
           {title}

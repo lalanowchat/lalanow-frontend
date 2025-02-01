@@ -1,88 +1,132 @@
-import { useState, useEffect } from "react"
-import axiosInstance from "../api/axios"
-import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from "@/components/ui/select"
-import { Input } from "@/components/ui/input"
-import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
-import Header from "@/components/Header"
-import { useTranslation } from 'react-i18next';
-import { useForm } from "react-hook-form"
-import { zodResolver } from "@hookform/resolvers/zod"
-import * as z from "zod"
-import { Form, FormControl, FormField, FormItem, FormMessage, FormLabel } from "@/components/ui/form"
-import MapComponent from '@/components/MapComponent';
+import { useState, useEffect } from "react";
+import axiosInstance from "../api/axios";
+import { useNavigate } from "react-router-dom";
+import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from "@/components/ui/select";
+import { Input } from "@/components/ui/input";
+import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import Header from "@/components/Header";
+import { useTranslation } from "react-i18next";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import * as z from "zod";
+import { Form, FormControl, FormField, FormItem, FormMessage, FormLabel } from "@/components/ui/form";
+import MapComponent from "@/components/MapComponent";
+import { ArrowLeft } from "lucide-react";
+import { translateText } from "../translateText"; // Import translation function
 
 export default function NeedHelp() {
-  const [categories, setCategories] = useState([])
-  const [zipCode, setZipCode] = useState('')
-  const [chosenCategory, setChosenCategory] = useState('')
-  const [resources, setResources] = useState([])
-  const { t } = useTranslation();
+  const [categories, setCategories] = useState([]);
+  const [translatedCategories, setTranslatedCategories] = useState([]);
+  const [zipCode, setZipCode] = useState("");
+  const [chosenCategory, setChosenCategory] = useState("");
+  const [resources, setResources] = useState([]);
+  const { t, i18n } = useTranslation();
+  const navigate = useNavigate();
 
-
+  // Fetch categories from backend
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const [ categoriesRes] = await Promise.all([
-          axiosInstance.get('/resources/need-help-categories')
-        ])
-        setCategories(categoriesRes.data)
+        const { data } = await axiosInstance.get("/resources/need-help-categories");
+        setCategories(data);
+
+        // Pre-select first category
+        if (data.length > 0) {
+          setChosenCategory(data[0]); 
+        }
       } catch (error) {
-        console.error('Error fetching dropdown data:', error)
+        console.error("Error fetching dropdown data:", error);
       }
+    };
+
+    fetchData();
+  }, []);
+
+  // Fetch resources automatically when category is set
+  useEffect(() => {
+    if (chosenCategory) {
+      getResources();
     }
+  }, [chosenCategory]);
 
-    fetchData()
-  }, [])
+  // Translate categories when language changes
+  useEffect(() => {
+    const translateCategories = async () => {
+      if (categories.length === 0) return;
 
+      const translated = await Promise.all(
+        categories.map(async (category) => {
+          return await translateText(category, i18n.language.toUpperCase());
+        })
+      );
+
+      setTranslatedCategories(translated);
+    };
+
+    translateCategories();
+  }, [categories, i18n.language]);
+
+  // Form validation schema
   const formSchema = z.object({
-    category: z.string().min(1, {
-      message: "Please select a category",
-    }),
+    category: z.string().min(1, { message: "Please select a category" }),
     zipCode: z.string()
       .max(5, "Zip code must be 5 digits")
       .regex(/^\d+$/, "Must contain only numbers")
       .optional()
-      .or(z.literal(''))
-  })
+      .or(z.literal("")),
+  });
 
   const form = useForm({
     resolver: zodResolver(formSchema),
     defaultValues: {
       category: "",
-      zipCode: ""
-    }
-  })
+      zipCode: "",
+    },
+  });
 
+  // Fetch resources based on category and zip code
   const getResources = async () => {
-    const response = await axiosInstance.get(
-      `/resources/need-help/by-zip?category=${chosenCategory}&zipcode=${zipCode}`)
-    setResources(response.data.resources)
-  }
+    try {
+      const response = await axiosInstance.get(
+        `/resources/need-help/by-zip?category=${chosenCategory}&zipcode=${zipCode}`
+      );
+      setResources(response.data.resources);
+    } catch (error) {
+      console.error("Error fetching resources:", error);
+    }
+  };
 
   return (
     <>
       <Header title={`LaHelpNow > ${t("needhelp.need_help")}`} />
-      <div className="p-4">
+      <Button
+        variant="ghost"
+        onClick={() => navigate(-1)}
+        className="flex items-center gap-2 px-10 ml-6 mt-3"
+      >
+        <ArrowLeft className="w-4 h-4" />Back
+      </Button>
+      <div className="p-4 container max-w-screen-xl m-auto">
         {/* Information Section */}
-        <p className="text-muted-foreground mt-12 mb-4 text-sm md:text-base">
-          {t('needhelp.this_search_draws')}{' '}
+        <p className="text-muted-foreground mt-2 mb-4 text-sm md:text-base">
+          {t("needhelp.this_search_draws")}{" "}
           <a
             href="https://docs.google.com/spreadsheets/u/1/d/1KMk34XY5dsvVJjAoD2mQUVHYU_Ib6COz6jcGH5uJWDY/htmlview#"
             className="text-primary hover:underline"
             target="_blank"
             rel="noopener noreferrer"
           >
-            {t('needhelp.MALAN_resources_table')}
+            {t("needhelp.MALAN_resources_table")}
           </a>
         </p>
-  
+
         {/* Form Section */}
         <div className="flex flex-col md:flex-row gap-4 mb-8">
           <Form {...form}>
             <form
               onSubmit={form.handleSubmit(getResources)}
-              className="flex flex-col md:flex-row gap-4 w-full"
+              className="flex flex-col md:flex-row gap-4 w-full items-unset lg:items-end"
             >
               {/* Help Category */}
               <FormField
@@ -92,6 +136,7 @@ export default function NeedHelp() {
                   <FormItem className="text-left">
                     <FormLabel>Help Category</FormLabel>
                     <Select
+                      value={chosenCategory}
                       onValueChange={(value) => {
                         setChosenCategory(value);
                         field.onChange(value);
@@ -103,8 +148,8 @@ export default function NeedHelp() {
                         </SelectTrigger>
                       </FormControl>
                       <SelectContent>
-                        {categories.map((category, index) => (
-                          <SelectItem key={index} value={category}>
+                        {translatedCategories.map((category, index) => (
+                          <SelectItem key={index} value={categories[index]}>
                             {category}
                           </SelectItem>
                         ))}
@@ -114,13 +159,13 @@ export default function NeedHelp() {
                   </FormItem>
                 )}
               />
-  
+
               {/* ZIP Code */}
               <FormField
                 control={form.control}
                 name="zipCode"
                 render={({ field }) => (
-                  <FormItem className="text-left">
+                  <FormItem className="text-left" style={{ marginBottom: "-8px" }}>
                     <FormLabel>{t("needhelp.zip_code")}</FormLabel>
                     <FormControl>
                       <Input
@@ -136,27 +181,27 @@ export default function NeedHelp() {
                   </FormItem>
                 )}
               />
-  
+
               {/* Search Button */}
               <Button type="submit" className="w-full md:w-auto">
-                {t('needhelp.search')}
+                {t("needhelp.search")}
               </Button>
             </form>
           </Form>
         </div>
-  
+
         {/* Map Section */}
         <div id="map" className="relative z-10 mb-8 w-full h-[300px] md:h-[400px] lg:h-[500px]">
           <MapComponent resources={resources} />
         </div>
-  
+
         {/* Resource Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {resources?.length === 0 ? (
             <Card>
               <CardHeader>
-                <CardTitle>{t('needhelp.no_results')}</CardTitle>
-                <CardDescription>{t('needhelp.no_resources_found')}</CardDescription>
+                <CardTitle>{t("needhelp.no_results")}</CardTitle>
+                <CardDescription>{t("needhelp.no_resources_found")}</CardDescription>
               </CardHeader>
             </Card>
           ) : (
@@ -184,5 +229,5 @@ export default function NeedHelp() {
         </div>
       </div>
     </>
-  );  
+  );
 }
