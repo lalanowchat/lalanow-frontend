@@ -15,6 +15,8 @@ const Chatbot = () => {
 
       // Re-load the chatbot whenever the language changes
       i18n.on("languageChanged", () => {
+        console.log("Language changed to:", i18n.language); 
+        removeChatbot();
         loadChatbot();
       });
 
@@ -52,6 +54,22 @@ const Chatbot = () => {
       },
     });
   };
+
+  const removeChatbot = () => {
+    console.log("Attempting to remove the chatbot iframe...");
+  
+    // Adding a small delay to allow time for the iframe to load after the language change
+    setTimeout(() => {
+      const iframe = document.querySelector('iframe[src*="voiceflow"]');
+      console.log("Found iframe:", iframe); // Log to check if the iframe is found
+  
+      if (iframe) {
+        console.log("Removing iframe");
+        iframe.parentElement?.removeChild(iframe); // Remove the iframe element
+      }
+    }, 2000); // 2-second delay to ensure iframe is added to the DOM
+  };
+  
 
   const handleChatbotClick = () => {
     if (window.voiceflow && window.voiceflow.chat) {
