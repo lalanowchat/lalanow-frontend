@@ -50,7 +50,7 @@ const Chatbot = () => {
         title: "LaHelpNow",
         description: t("chatbot.get_and_give_help"),
         image: "/botLogo.png",
-        stylesheet: "http://localhost:5174/chatbot-styles.css",
+        stylesheet: "https://lahelpnow.org/chatbot-styles.css",
       },
     });
   };
