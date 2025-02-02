@@ -1,43 +1,21 @@
 import React, { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 
 const Chatbot = () => {
   const [showTooltip, setShowTooltip] = useState(true);
+  const { t, i18n } = useTranslation(); // Import i18n translation hook
 
+  // This effect will load the chatbot
   useEffect(() => {
     const script = document.createElement("script");
     script.src = "https://cdn.voiceflow.com/widget/bundle.mjs";
     script.type = "text/javascript";
     script.onload = () => {
-      const translations = {
-        en: {
-          title: "LaHelpNow",
-          description: "Get and give help during California Wildfires",
-        },
-        es: {
-          title: "LaAyudaAhora",
-          description:
-            "Obtén y brinda ayuda durante los incendios forestales en California",
-        },
-        fr: {
-          title: "LaAideMaintenant",
-          description:
-            "Obtenez et donnez de l'aide pendant les incendies de forêt en Californie",
-        },
-      };
+      loadChatbot(); // Load the chatbot initially
 
-      const selectedLanguage = document.documentElement.lang || "en";
-
-      window.voiceflow.chat.load({
-        verify: { projectID: "6788df4b6fcd91c13b78ebb2" },
-        url: "https://general-runtime.voiceflow.com",
-        versionID: "production",
-        assistant: {
-          title: translations[selectedLanguage]?.title || "LaHelpNow",
-          description:
-            translations[selectedLanguage]?.description ||
-            "Get and give help during California Wildfires",
-          image: "string",
-        },
+      // Re-load the chatbot whenever the language changes
+      i18n.on("languageChanged", () => {
+        loadChatbot();
       });
 
       // Wait for chatbot to render, then attach tooltip
@@ -56,7 +34,24 @@ const Chatbot = () => {
     return () => {
       document.body.removeChild(script);
     };
-  }, []);
+  }, [i18n.language]); // Re-run when language changes
+
+  // Load or reload the chatbot with the current language
+  const loadChatbot = () => {
+    const selectedLanguage = i18n.language || "en"; // Get the current language
+
+    window.voiceflow.chat.load({
+      verify: { projectID: "6788df4b6fcd91c13b78ebb2" },
+      url: "https://general-runtime.voiceflow.com",
+      versionID: "production",
+      assistant: {
+        title: "LaHelpNow",
+        description: t("chatbot.get_and_give_help"),
+        image: "/botLogo.png",
+        stylesheet: "http://localhost:5174/chatbot-styles.css",
+      },
+    });
+  };
 
   const handleChatbotClick = () => {
     if (window.voiceflow && window.voiceflow.chat) {
@@ -73,15 +68,15 @@ const Chatbot = () => {
           className="absolute bottom-16 right-0 bg-blue-500 text-white text-sm px-4 py-2 rounded-lg shadow-md animate-fadeIn"
           style={{
             position: "fixed",
-            bottom: "94px", // Adjusted to appear above the chatbot button
+            bottom: "94px",
             right: "55px",
-            maxWidth: "330px", // Ensures wrapping on smaller screens
+            maxWidth: "330px",
             textAlign: "center",
-            whiteSpace: "normal", // Allows multi-line text
+            whiteSpace: "normal",
             lineHeight: "1.3",
           }}
         >
-          Want to talk with Lala about what's going on?
+            Want to talk with Lala about what's going on?
           <br />
           <span style={{float: "right"}} >Click here!</span>
           <div
@@ -98,22 +93,6 @@ const Chatbot = () => {
           ></div>
         </div>
       )}
-
-      <script>
-        {`
-          document.addEventListener("DOMContentLoaded", () => {
-            setTimeout(() => {
-              const chatbotButton = document.querySelector('iframe[src*="voiceflow"]')?.parentElement;
-              if (chatbotButton) {
-                chatbotButton.appendChild(document.getElementById("chatbot-tooltip"));
-                chatbotButton.addEventListener("click", () => {
-                  document.getElementById("chatbot-tooltip").style.display = "none";
-                });
-              }
-            }, 2000);
-          });
-        `}
-      </script>
     </>
   );
 };
