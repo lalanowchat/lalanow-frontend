@@ -105,7 +105,7 @@ export default function NeedHelp() {
         onClick={() => navigate(-1)}
         className="flex items-center gap-2 px-10 ml-6 mt-3"
       >
-        <ArrowLeft className="w-4 h-4" />Back
+        <ArrowLeft className="w-4 h-4" />{t("needhelp.Back")}
       </Button>
       <div className="p-4 container max-w-screen-xl m-auto">
         {/* Information Section */}
@@ -134,7 +134,7 @@ export default function NeedHelp() {
                 name="category"
                 render={({ field }) => (
                   <FormItem className="text-left">
-                    <FormLabel>Help Category</FormLabel>
+                    <FormLabel>{t("needhelp.help_category")}</FormLabel>
                     <Select
                       value={chosenCategory}
                       onValueChange={(value) => {
@@ -190,43 +190,74 @@ export default function NeedHelp() {
           </Form>
         </div>
 
-        {/* Map Section */}
-        <div id="map" className="relative z-10 mb-8 w-full h-[300px] md:h-[400px] lg:h-[500px]">
-          <MapComponent resources={resources} />
-        </div>
+  <div className="container max-w-screen-xl mx-auto">
+  {/* Two-column layout (Map on Right, Resources on Left) */}
+  <div className="grid grid-cols-1 lg:grid-cols-[1fr_2fr] gap-6">
+    {/* Resources Column (1fr) */}
+    <div className="space-y-4">
+      {resources?.length === 0 ? (
+        <Card>
+          <CardHeader>
+            <CardTitle>{t("needhelp.no_results")}</CardTitle>
+            <CardDescription>{t("needhelp.no_resources_found")}</CardDescription>
+          </CardHeader>
+        </Card>
+      ) : (
+        resources.slice(0, 3).map((resource, index) => ( // Show first 3 resources
+          <Card key={index} className="shadow-md">
+            <CardHeader>
+              <div className="flex justify-between items-start">
+                <div>
+                  <CardTitle>{resource.name}</CardTitle>
+                  <CardDescription>{resource.address}</CardDescription>
+                </div>
+                {zipCode && (
+                  <span className="font-bold text-blue-500">
+                    {resource.distance.toFixed(1)} miles
+                  </span>
+                )}
+              </div>
+            </CardHeader>
+            <CardContent>
+              <p className="whitespace-pre-line text-left">{resource.providing}</p>
+            </CardContent>
+          </Card>
+        ))
+      )}
+    </div>
 
-        {/* Resource Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {resources?.length === 0 ? (
-            <Card>
-              <CardHeader>
-                <CardTitle>{t("needhelp.no_results")}</CardTitle>
-                <CardDescription>{t("needhelp.no_resources_found")}</CardDescription>
-              </CardHeader>
-            </Card>
-          ) : (
-            resources?.map((resource, index) => (
-              <Card key={index} className="shadow-md">
-                <CardHeader>
-                  <div className="flex justify-between items-start">
-                    <div>
-                      <CardTitle>{resource.name}</CardTitle>
-                      <CardDescription>{resource.address}</CardDescription>
-                    </div>
-                    {zipCode && (
-                      <span className="font-bold text-blue-500">
-                        {resource.distance.toFixed(1)} miles
-                      </span>
-                    )}
-                  </div>
-                </CardHeader>
-                <CardContent>
-                  <p className="whitespace-pre-line text-left">{resource.providing}</p>
-                </CardContent>
-              </Card>
-            ))
-          )}
-        </div>
+    {/* Map Column (2fr) */}
+    <div className="relative z-10 w-full h-[300px] md:h-[400px] lg:h-[500px]">
+      <MapComponent resources={resources} />
+    </div>
+</div>
+
+
+  {/* Full-Width Resource Grid After Map Finishes */}
+  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-8">
+    {resources.slice(3).map((resource, index) => ( // Remaining resources go full-width
+      <Card key={index} className="shadow-md">
+        <CardHeader>
+          <div className="flex justify-between items-start">
+            <div>
+              <CardTitle>{resource.name}</CardTitle>
+              <CardDescription>{resource.address}</CardDescription>
+            </div>
+            {zipCode && (
+              <span className="font-bold text-blue-500">
+                {resource.distance.toFixed(1)} miles
+              </span>
+            )}
+          </div>
+        </CardHeader>
+        <CardContent>
+          <p className="whitespace-pre-line text-left">{resource.providing}</p>
+        </CardContent>
+      </Card>
+    ))}
+  </div>
+</div>
+
       </div>
     </>
   );

@@ -12,7 +12,11 @@
       "choose_category": "Kies een categorie",
       "search": "Zoeken",
       "no_results": "Geen resultaten",
-      "no_resources_found": "Geen bronnen gevonden voor deze categorie en regio."
+      "no_resources_found": "Geen bronnen gevonden voor deze categorie en regio.",
+      "help_category": "Hulp Categorie",
+      "Back": "Terug",
+      "want_to_talk_with_Lala": "Wil je met Lala praten over wat er gebeurt?",
+      "click_here": "Klik hier!"
     },
     "chatbot": {
       "get_and_give_help": "Krijg en geef hulp tijdens bosbranden in Californië"

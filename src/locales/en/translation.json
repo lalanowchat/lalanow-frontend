@@ -12,7 +12,11 @@
       "choose_category": "Choose Category",
       "search": "Search",
       "no_results": "No Results",
-      "no_resources_found": "No resources found for this category and area."
+      "no_resources_found": "No resources found for this category and area.",
+      "help_category": "Help Category",
+      "Back": "Back",
+      "want_to_talk_with_Lala": "Want to talk with Lala about what's going on?",
+      "click_here": "Click here!"
     },
     "chatbot": {
       "get_and_give_help": "Get and give help during California Wildfires"

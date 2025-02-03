@@ -94,9 +94,9 @@ const Chatbot = () => {
             lineHeight: "1.3",
           }}
         >
-            Want to talk with Lala about what's going on?
+            {t("needhelp.want_to_talk_with_Lala")}
           <br />
-          <span style={{float: "right"}} >Click here!</span>
+          <span style={{float: "right"}} >{t("needhelp.click_here")}</span>
           <div
             className="absolute bottom-[-6px] left-1/2 transform -translate-x-1/2 w-3 h-3 bg-blue-500 rotate-45"
             style={{

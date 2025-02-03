@@ -12,7 +12,11 @@
       "choose_category": "Chọn Danh Mục",
       "search": "Tìm kiếm",
       "no_results": "Không có kết quả",
-      "no_resources_found": "Không tìm thấy tài nguyên cho danh mục và khu vực này."
+      "no_resources_found": "Không tìm thấy tài nguyên cho danh mục và khu vực này.",
+      "help_category": "Danh mục trợ giúp",
+      "Back": "Quay lại",
+      "want_to_talk_with_Lala": "Bạn muốn nói chuyện với Lala về những gì đang xảy ra?",
+      "click_here": "Nhấn vào đây!"
     },
     "chatbot": {
       "get_and_give_help": "Nhận và cung cấp trợ giúp trong thời gian cháy rừng tại California"
