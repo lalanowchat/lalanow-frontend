@@ -12,7 +12,11 @@
       "choose_category": "Piliin ang Kategorya",
       "search": "Maghanap",
       "no_results": "Walang Resulta",
-      "no_resources_found": "Walang nahanap na mapagkukunan para sa kategorya at lugar na ito."
+      "no_resources_found": "Walang nahanap na mapagkukunan para sa kategorya at lugar na ito.",
+      "help_category": "Kategorya ng Tulong",
+      "Back": "Bumalik",
+      "want_to_talk_with_Lala": "Gusto mo bang makipag-usap kay Lala tungkol sa nangyayari?",
+      "click_here": "I-click dito!"
     },
     "chatbot": {
       "get_and_give_help": "Humingi at magbigay ng tulong sa panahon ng California Wildfires"

@@ -12,7 +12,11 @@
       "choose_category": "Choisissez une catégorie",
       "search": "Rechercher",
       "no_results": "Aucun résultat",
-      "no_resources_found": "Aucune ressource trouvée pour cette catégorie et cette zone."
+      "no_resources_found": "Aucune ressource trouvée pour cette catégorie et cette zone.",
+      "help_category": "Catégorie d'aide",
+      "Back": "Retour",
+      "want_to_talk_with_Lala": "Vous voulez parler avec Lala de ce qui se passe ?",
+      "click_here": "Cliquez ici !"
     },
     "chatbot": {
       "get_and_give_help": "Obtenez et offrez de l'aide pendant les incendies de forêt en Californie"
