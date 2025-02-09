@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 
 const Chatbot = () => {
-  const [showTooltip, setShowTooltip] = useState(true);
+  const [showTooltip, setShowTooltip] = useState(false);
   const { t, i18n } = useTranslation(); // Import i18n translation hook
 
   // This effect will load the chatbot

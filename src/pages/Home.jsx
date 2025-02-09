@@ -2,14 +2,16 @@ import React from 'react';
 import Header from '../components/Header';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import logo from '../assets/helpnow-logo.png'
 
 export default function Home() {
   const { t } = useTranslation();
   return (
     <>
       <Header title="LaHelpNow" />
-      <div className="flex flex-col items-center justify-center min-h-screen p-4">
+      <div className="flex flex-col items-center justify-center p-4">
         {/* Main container */}
+        <img src={logo} alt="Help Now Logo" className="xl:h-96 xl:w-96" />
         <div className="flex flex-col md:flex-row w-full max-w-4xl gap-4">
           {/* Need Help Button */}
           <Link
