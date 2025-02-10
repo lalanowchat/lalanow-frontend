@@ -94,6 +94,7 @@ const Chatbot = () => {
             lineHeight: "1.3",
           }}
         >
+          Chat Now
             {t("needhelp.want_to_talk_with_Lala")}
           <br />
           <span style={{float: "right"}} >{t("needhelp.click_here")}</span>
