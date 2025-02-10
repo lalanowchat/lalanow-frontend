@@ -89,7 +89,7 @@ export default function WantToHelp() {
   const getResources = async () => {
     try {
       const response = await axiosInstance.get(
-        `/resources/need-help/by-zip?category=${chosenCategory}&zipcode=${zipCode}`
+        `/resources/want-to-help/by-zip?category=${chosenCategory}&zipcode=${zipCode}`
       );
       setResources(response.data.resources);
     } catch (error) {
@@ -219,7 +219,7 @@ export default function WantToHelp() {
                       </div>
                     </CardHeader>
                     <CardContent>
-                      <p className="whitespace-pre-line text-left">{resource.providing}</p>
+                      <p className="whitespace-pre-line text-left">{resource.volunteers_needs}</p>
                     </CardContent>
                   </Card>
                 ))
@@ -251,7 +251,7 @@ export default function WantToHelp() {
                   </div>
                 </CardHeader>
                 <CardContent>
-                  <p className="whitespace-pre-line text-left">{resource.providing}</p>
+                  <p className="whitespace-pre-line text-left">{resource.volunteers_needs}</p>
                 </CardContent>
               </Card>
             ))}
