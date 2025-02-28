@@ -1,5 +1,6 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
+import logo from '../assets/HelpNow-logo.svg'
 
 export default function Header({ title }) {
   const { t, i18n } = useTranslation();
@@ -15,10 +16,15 @@ export default function Header({ title }) {
           {title}
         </div>
 
-        <div className="relative">
+        <div className="flex ">
+          <a
+            href="https://www.zeffy.com/embed/donation-form/donate-to-provide-los-angeles-with-real-time-verified-resources-in-times-of-crisis?modal=true"
+          >
+            <img src={logo} alt="Help Now Logo" className="h-16 w-16 px-2 py-1 hover:animate-spin animate-bounce" />
+          </a>
           <select
             onChange={handleLanguageChange}
-            className="p-3 rounded-md bg-blue-500 text-white font-medium focus:outline-none focus:ring-2 focus:ring-blue-500 hover:bg-blue-600 transition duration-200 ease-in-out"
+            className="p-3 my-4 rounded-md bg-blue-500 text-white font-medium focus:outline-none focus:ring-2 focus:ring-blue-500 hover:bg-blue-600 transition duration-200 ease-in-out"
           >
             <option value="en">English</option>
             <option value="es">Español</option>
