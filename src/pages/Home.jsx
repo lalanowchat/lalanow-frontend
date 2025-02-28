@@ -31,10 +31,10 @@ export default function Home() {
         </div>
         <Link
           to="https://www.zeffy.com/embed/donation-form/donate-to-provide-los-angeles-with-real-time-verified-resources-in-times-of-crisis?modal=true"
-          className=" text-[#2f4860]"
+          className="hover:animate-pulse"
         >
           <img src={heart} alt="Donate Heart" className="h-60 w-60 py-4" />
-          <div className="-translate-y-40 text-2xl font-bold">Donate Now</div>
+          <div className="-translate-y-40 text-2xl font-bold text-[#2f4860]">Donate Now</div>
         </Link>
       </div>
     </>
