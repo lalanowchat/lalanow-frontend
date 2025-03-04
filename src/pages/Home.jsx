@@ -30,7 +30,7 @@ export default function Home() {
           </Link>
         </div>
         <Link
-          to="https://www.zeffy.com/embed/donation-form/donate-to-provide-los-angeles-with-real-time-verified-resources-in-times-of-crisis?modal=true"
+          to="https://www.zeffy.com/fundraising/donate-to-provide-los-angeles-with-real-time-verified-resources-in-times-of-crisis"
           className="hover:animate-pulse"
         >
           <img src={heart} alt="Donate Heart" className="h-60 w-60 py-4" />
