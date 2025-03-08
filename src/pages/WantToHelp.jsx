@@ -90,7 +90,7 @@ export default function WantToHelp() {
   const getResources = async () => {
     try {
       const response = await axios.get(
-        `/data`
+        `https://lahelpbackend-2.azurewebsites.net/data`
       );
 
       setResources(response.data);
