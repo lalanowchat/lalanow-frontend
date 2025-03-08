@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import axiosInstance from "../api/axios";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from "@/components/ui/select";
 import { Input } from "@/components/ui/input";
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/card";
@@ -88,14 +89,16 @@ export default function WantToHelp() {
   // Fetch resources based on category and zip code
   const getResources = async () => {
     try {
-      const response = await axiosInstance.get(
-        `/resources/want-to-help/by-zip?category=${chosenCategory}&zipcode=${zipCode}`
+      const response = await axios.get(
+        `https://lahelpbackend-2.azurewebsites.net/data`
       );
-      setResources(response.data.resources);
+
+      setResources(response.data);
     } catch (error) {
       console.error("Error fetching resources:", error);
     }
   };
+
 
   return (
     <>
@@ -208,8 +211,8 @@ export default function WantToHelp() {
                     <CardHeader>
                       <div className="flex justify-between items-start">
                         <div>
-                          <CardTitle>{resource.name}</CardTitle>
-                          <CardDescription>{resource.address}</CardDescription>
+                          <CardTitle>{resource.Name}</CardTitle>
+                          <CardDescription>{resource.Address}</CardDescription>
                         </div>
                         {zipCode && (
                           <span className="font-bold text-blue-500">
@@ -219,7 +222,7 @@ export default function WantToHelp() {
                       </div>
                     </CardHeader>
                     <CardContent>
-                      <p className="whitespace-pre-line text-left">{resource.volunteers_needs}</p>
+                      <p className="whitespace-pre-line text-left">{resource.Volunteers_Needs}</p>
                     </CardContent>
                   </Card>
                 ))
@@ -240,8 +243,8 @@ export default function WantToHelp() {
                 <CardHeader>
                   <div className="flex justify-between items-start">
                     <div>
-                      <CardTitle>{resource.name}</CardTitle>
-                      <CardDescription>{resource.address}</CardDescription>
+                      <CardTitle>{resource.Name}</CardTitle>
+                      <CardDescription>{resource.Address}</CardDescription>
                     </div>
                     {zipCode && (
                       <span className="font-bold text-blue-500">
@@ -251,7 +254,7 @@ export default function WantToHelp() {
                   </div>
                 </CardHeader>
                 <CardContent>
-                  <p className="whitespace-pre-line text-left">{resource.volunteers_needs}</p>
+                  <p className="whitespace-pre-line text-left">{resource.Volunteers_Needs}</p>
                 </CardContent>
               </Card>
             ))}
