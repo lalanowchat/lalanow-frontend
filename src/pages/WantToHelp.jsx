@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import axiosInstance from "../api/axios2";
+import axiosInstance from "../api/axios";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from "@/components/ui/select";
@@ -29,7 +29,7 @@ export default function WantToHelp() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const { data } = await axios.get("/data");
+        const { data } = await axiosInstance.get("/resources/need-help-categories");
         setCategories(data);
 
         // Pre-select first category
