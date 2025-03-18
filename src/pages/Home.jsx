@@ -29,6 +29,9 @@ export default function Home() {
             {t('header.wantToHelp')}
           </Link>
         </div>
+        <div className="py-16">
+          HelpNow provides real-time, verified emergency resources for wildfires, floods, and disasters. Get 24/7 assistance from Lala, our AI-powered digital assistant.
+        </div>
         <Link
           to="https://www.zeffy.com/fundraising/donate-to-provide-los-angeles-with-real-time-verified-resources-in-times-of-crisis"
           className="hover:animate-pulse"
