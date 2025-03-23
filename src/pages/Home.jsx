@@ -29,7 +29,7 @@ export default function Home() {
             {t('header.wantToHelp')}
           </Link>
         </div>
-        <div className="py-16">
+        <div className="pt-8">
           HelpNow provides real-time, verified emergency resources for wildfires, floods, and disasters. Get 24/7 assistance from Lala, our AI-powered digital assistant.
         </div>
         <Link
