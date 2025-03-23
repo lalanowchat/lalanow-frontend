@@ -23,13 +23,13 @@ export default function Home() {
           </Link>
           {/* Want to Help Button */}
           <Link
-            to="/want-to-help"
+            to="https://www.mutualaid.la/resources"
             className="flex-1 p-4 text-lg md:text-xl bg-green-500 text-white rounded-lg hover:bg-green-600 transition-colors text-center"
           >
             {t('header.wantToHelp')}
           </Link>
         </div>
-        <div className="py-16">
+        <div className="pt-8">
           HelpNow provides real-time, verified emergency resources for wildfires, floods, and disasters. Get 24/7 assistance from Lala, our AI-powered digital assistant.
         </div>
         <Link
