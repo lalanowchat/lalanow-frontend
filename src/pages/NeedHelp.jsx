@@ -109,7 +109,7 @@ export default function NeedHelp() {
       </Button>
       <div className="p-4 container max-w-screen-xl m-auto">
         {/* Information Section */}
-        <p className="text-muted-foreground mt-2 mb-4 text-sm md:text-base">
+        {/* <p className="text-muted-foreground mt-2 mb-4 text-sm md:text-base">
           {t("needhelp.this_search_draws")}{" "}
           <a
             href="https://docs.google.com/spreadsheets/u/1/d/1KMk34XY5dsvVJjAoD2mQUVHYU_Ib6COz6jcGH5uJWDY/htmlview#"
@@ -119,7 +119,7 @@ export default function NeedHelp() {
           >
             {t("needhelp.MALAN_resources_table")}
           </a>
-        </p>
+        </p> */}
 
         {/* Form Section */}
         <div className="flex flex-col md:flex-row gap-4 mb-8">
