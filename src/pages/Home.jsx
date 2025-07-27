@@ -23,7 +23,7 @@ export default function Home() {
           </Link>
           {/* Want to Help Button */}
           <Link
-            to="https://www.mutualaid.la/resources"
+            to="https://mutualaidla.org/get-involved/"
             className="flex-1 p-4 text-lg md:text-xl bg-green-500 text-white rounded-lg hover:bg-green-600 transition-colors text-center"
           >
             {t('header.wantToHelp')}
