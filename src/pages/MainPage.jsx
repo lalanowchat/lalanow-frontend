@@ -1,4 +1,4 @@
-import { Card } from '@/components/ui/card';
+import { Card, CardTitle } from '@/components/ui/card';
 import logo from '../assets/HelpNow-logo.svg'
 import botLogo from '../assets/bot_logo.png'
 import { Button } from '@headlessui/react';
