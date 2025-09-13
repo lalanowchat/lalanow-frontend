@@ -3,32 +3,45 @@ import logo from '../assets/HelpNow-logo.svg'
 import botLogo from '../assets/bot_logo.png'
 import { Button } from '@headlessui/react';
 import donateHeart from '../assets/donate-heart.svg'
+import { TbUrgent } from "react-icons/tb";
+import { IoHelpBuoy } from "react-icons/io5";
+import { MdOutlineLocalTaxi } from "react-icons/md";
+import { IoIosFlag } from "react-icons/io";
+import { FaHouseDamage } from "react-icons/fa";
+import { GiHealthIncrease } from "react-icons/gi";
+import { Link } from 'react-router-dom';
+
+
 
 export default function MainPage() {
   return (
     <div className="flex flex-col">
-      <div className="flex flex-col items-center justify-center bg-blue-500 text-white py-8 px-2 w-full">
-        <img src={logo} alt="Help Now Logo" className="h-32 w-32 py-4" />
+      <div className="flex flex-col items-center justify-center bg-blue-400 text-white py-8 px-2 w-full">
+        <img src={logo} alt="Help Now Logo" className="h-40 w-40 py-4" />
         <div className="font-bold text-3xl pb-2"> Real-Time Emergency Resources</div>
         <div className="font-light text-xs py-1"> Verified assistance for wildfires, floods, and disasters in Los Angeles</div>
         <div className="font-light text-xs py-1"> Get 24/7 help from Lala, our AI-powered assistant</div>
       </div>
       <div className="flex items-center justify-center p-4 space-x-4 bg-gray-100">
         <Card className="min-h-36 max-h-48 w-60 p-4">
-          <div className="items-center justify-center">
-            <div>Icon</div>
-            <div className="font-bold ml-2"> I Need Help</div>
+          <div className="flex items-center justify-center">
+            <div className="flex font-bold ml-2"> <TbUrgent className="w-10 h-10 sm:w-7 sm:h-7 rounded p-1 text-blue-600 mr-2 bg-blue-200" /> I Need Help</div>
           </div>
           <div className="text-[0.600rem] py-2"> Find food, shelter, healthcare, and emergency services near you</div>
-          <Button className="text-white bg-blue-500 w-full h-8 rounded-md text-[.600rem] mb-4 mt-2"> Find Resources Now </Button>
+          <Link
+            to="/need-help"
+          >
+            <Button className="text-white bg-blue-500 w-full h-8 rounded-md text-[.600rem] mb-4 mt-2"> Find Resources Now </Button>
+          </Link>
         </Card>
         <Card className="min-h-36 max-h-48 w-60 p-4">
-          <div className="items-center justify-center">
-            <div>Icon</div>
-            <div className="font-bold ml-2"> I Want Help</div>
+          <div className="flex items-center justify-center">
+            <div className="flex font-bold ml-2">  <IoHelpBuoy className="w-10 h-10 sm:w-7 sm:h-7 rounded p-1 text-green-600 mr-2 bg-green-200" /> I Want Help</div>
           </div>
           <div className="text-[0.600rem] py-2"> Volunteer, donate, or register your organization</div>
-          <Button className="text-white bg-green-500 w-full h-8 rounded-md text-[.600rem] mb-4 mt-2"> Get Involved </Button>
+          <Link to="https://mutualaidla.org/get-involved/">
+            <Button className="text-white bg-green-600 w-full h-8 rounded-md text-[.600rem] mb-4 mt-2"> Get Involved </Button>
+          </Link>
         </Card>
       </div>
       <div className="flex flex-col items-center justify-center py-8">
@@ -71,28 +84,28 @@ export default function MainPage() {
         <div className="font-extrabold text-2xl py-10">Emergency Resource Categories</div>
         <div className="flex flex-wrap mb-10 items-center justify-center">
           <div className="bg-gray-100 flex flex-col items-center justify-center p-4 max-w-40 rounded-md xs:m-4 m-1">
-            <div>Icon</div>
+            <IoIosFlag className="bg-orange-200 text-orange-400 p-1 w-7 h-7 mb-2 rounded" />
             <div className="font-extrabold text-xs">Find Assistance</div>
             <div className="text-[0.600rem] font-light">Food banks, pantries, some programs</div>
           </div>
           <div className="bg-gray-100 flex flex-col items-center justify-center p-4 max-w-40 rounded-md xs:m-4 m-1">
-            <div>Icon</div>
+            <FaHouseDamage className="bg-purple-200 text-purple-400 p-1 w-7 h-7 mb-2 rounded" />
             <div className="font-extrabold text-xs">Housing</div>
-            <div className="text-[0.600rem] font-light">Food banks, pantries, some programs</div>
+            <div className="text-[0.600rem] font-light">Shelters, temporary housing, centers </div>
           </div>
           <div className="bg-gray-100 flex flex-col items-center justify-center p-4 max-w-40 rounded-md xs:m-4 m-1">
-            <div>Icon</div>
+            <div>            <MdOutlineLocalTaxi className="bg-red-200 text-red-400 p-1 w-7 h-7 mb-2 rounded" /></div>
             <div className="font-extrabold text-xs">HealthCare</div>
-            <div className="text-[0.600rem] font-light">Food banks, pantries, some programs</div>
+            <div className="text-[0.600rem] font-light">Medical kits, clinics, mental health</div>
           </div>
           <div className="bg-gray-100 flex flex-col items-center justify-center p-4 max-w-40 rounded-md xs:m-4 m-1">
-            <div>Icon</div>
+            <div>            <GiHealthIncrease className="bg-yellow-100 text-yellow-400 p-1 w-7 h-7 mb-2 rounded" /></div>
             <div className="font-extrabold text-xs">Emergency Services</div>
-            <div className="text-[0.600rem] font-light">Food banks, pantries, some programs</div>
+            <div className="text-[0.600rem] font-light">Crisis response, disaster relief</div>
           </div>
         </div>
       </div>
-      <div className="bg-blue-800 flex flex-col py-8 px-16">
+      <div className="bg-teal-600 flex flex-col py-8 px-16">
         <div className="text-white font-extrabold pb-4">
           Making a Difference Together
         </div>
