@@ -11,10 +11,18 @@ export default defineConfig({
   },
   server: {
     proxy: {
-      '/data': {
-        target: 'https://lahelpbackend-2.azurewebsites.net',
+      "/data": {
+        target: "https://lalanow-backend-v3.fly.dev/data", // formerly, https://lahelpnow-backend-v2.fly.dev/
         changeOrigin: true,
       },
-    }
-  }
-})
+      "/resources": {
+        target: "https://lalanow-backend-v3.fly.dev/resources/all", // formerly, localhost:3001
+        changeOrigin: true,
+      },
+      "/translate": {
+        target: "https://api-free.deepl.com/v2/translate",
+        changeOrigin: true,
+      },
+    }, // end proxy key
+  }, // end server key
+});

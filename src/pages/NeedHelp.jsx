@@ -208,8 +208,9 @@ export default function NeedHelp() {
             <CardHeader>
               <div className="flex justify-between items-start">
                 <div>
-                  <CardTitle>{resource.name}</CardTitle>
-                  <CardDescription>{resource.address}</CardDescription>
+                  <CardTitle>{resource.Org_Name}</CardTitle>
+                  <br />
+                  <CardDescription> {resource.Org_FullAddress} </CardDescription>
                 </div>
                 {zipCode && (
                   <span className="font-bold text-blue-500">
@@ -219,7 +220,7 @@ export default function NeedHelp() {
               </div>
             </CardHeader>
             <CardContent>
-              <p className="whitespace-pre-line text-left">{resource.providing}</p>
+              <p className="whitespace-pre-line text-left"> <b> providing: </b> {resource.providing} </p>
             </CardContent>
           </Card>
         ))
@@ -240,8 +241,9 @@ export default function NeedHelp() {
         <CardHeader>
           <div className="flex justify-between items-start">
             <div>
-              <CardTitle>{resource.name}</CardTitle>
-              <CardDescription>{resource.address}</CardDescription>
+              <CardTitle>{resource.Org_Name}</CardTitle>
+               <br />
+              <CardDescription>{resource.Org_FullAddress}</CardDescription>
             </div>
             {zipCode && (
               <span className="font-bold text-blue-500">
@@ -251,7 +253,7 @@ export default function NeedHelp() {
           </div>
         </CardHeader>
         <CardContent>
-          <p className="whitespace-pre-line text-left">{resource.providing}</p>
+          <p className="whitespace-pre-line text-left"> <b> providing: </b> {resource.providing} </p>
         </CardContent>
       </Card>
     ))}
