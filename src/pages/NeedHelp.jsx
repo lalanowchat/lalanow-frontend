@@ -195,6 +195,8 @@ export default function NeedHelp() {
   <div className="grid grid-cols-1 lg:grid-cols-[1fr_2fr] gap-6">
     {/* Resources Column (1fr) */}
     <div className="space-y-4">
+      {/* Makes use of the 'optional chaining' operator [?.] to safely check if 'resources' is null or undefined. This prevents errors that would otherwise occur when attempting to access properties or call methods on non-existent values */}
+      {/* When using ?. in a property access or method call, the expression will short-circuit and return 'undefined', if the value to the left of '?.' is null or undefined.  This avoids throwing a TypeError */}
       {resources?.length === 0 ? (
         <Card>
           <CardHeader>

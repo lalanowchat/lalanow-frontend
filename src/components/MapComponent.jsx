@@ -1,5 +1,6 @@
-import React, { useEffect, useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import L from 'leaflet';
+//import { MapContainer, TileLayer } from "react-leaflet";
 import 'leaflet/dist/leaflet.css';
 
 // Fix marker icons for production
@@ -13,11 +14,23 @@ L.Icon.Default.mergeOptions({
   shadowUrl: markerShadow,
 });
 
+// --- Fix for default marker icons in React-Leaflet ---
+// Without this, the default blue markers will appear as broken images.
+delete L.Icon.Default.prototype._getIconUrl;
+
 const MapComponent = ({ resources }) => {
-  const mapRef = useRef(null);
-  const markersLayerRef = useRef(null);
+  const mapRef = useRef(null);                // Map Reference object
+  const markersLayerGroupRef = useRef(null);  // Markers Layer Reference object
 
   useEffect(() => {
+
+    // This prevents a "Map container is already initialized" error. 
+    // Prevents re-initializing a map container, if it has already been initialized
+    if (mapRef.current) {
+      mapRef.current.off();
+      mapRef.current.remove();
+    } 
+
     // Initialize the map centered on Los Angeles
     mapRef.current = L.map('map').setView([34.0522, -118.2437], 11);
 
@@ -27,29 +40,26 @@ const MapComponent = ({ resources }) => {
     }).addTo(mapRef.current);
 
     // Create a layer group for markers
-    markersLayerRef.current = L.layerGroup().addTo(mapRef.current);
+    markersLayerGroupRef.current = L.layerGroup().addTo(mapRef.current); // 'mapRef.current' is your L.Map instance
 
-    return () => {
-      mapRef.current.remove();
-    };
-  }, []);
-
-  useEffect(() => {
     // Update markers when resources change
-    if (markersLayerRef.current) {
-      markersLayerRef.current.clearLayers();
-
+    if (markersLayerGroupRef.current) {
+      markersLayerGroupRef.current.clearLayers();
       resources
-      .filter((resource) => resource.lat !== undefined && resource.long !== undefined) // Validate lat and lng
+      .filter((resource) => resource.Org_Latitude !== undefined && resource.Org_Longitude !== undefined) // Validate lat and lng
       .forEach((resource) => {
-        const marker = L.marker([resource.lat, resource.long]);
+        const marker = L.marker([resource.Org_Latitude, resource.Org_Longitude]);
+        //console.log("Organz Name: ", resource.Org_Name); console.log("Current Lat: ", resource.Org_Latitude);console.log("Current Lon: ", resource.Org_Longitude); console.log("------------------");   
+
         marker.bindPopup(
-          `<strong>${resource.name || 'Unknown Name'}</strong><br>${resource.address || 'Unknown Address'}<br><br>${resource.providing || 'Providing Unknown'}`
+          `<strong>${resource.Org_Name || 'Unknown Name'}</strong><br>${resource.Org_FullAddress || 'Unknown Address'}<br><br>${resource.providing || 'Providing Unknown'}`
         );
-        markersLayerRef.current.addLayer(marker);
+        markersLayerGroupRef.current.addLayer(marker);
       });
+      markersLayerGroupRef.current.addTo(mapRef.current);
     }
-  }, [resources]);
+
+  }, [resources]); //Re-run effect, i.e. update Map UI, if the new coordinates are passed into MapComponent from server API call
 
   return <div id="map" style={{ height: '500px', width: '100%' }} />;
 };
