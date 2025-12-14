@@ -9,7 +9,7 @@ export default function Home() {
   const { t } = useTranslation();
   return (
     <>
-      <Header title="LaHelpNow" />
+      <Header title="HelpNow Inc" />
       <div className="flex flex-col items-center justify-center p-4">
         {/* Main container */}
         <img src={logo} alt="Help Now Logo" className="h-80 w-80 py-4" />

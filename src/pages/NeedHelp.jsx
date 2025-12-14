@@ -99,7 +99,7 @@ export default function NeedHelp() {
 
   return (
     <>
-      <Header title={`LaHelpNow > ${t("needhelp.need_help")}`} />
+      <Header title={`HelpNow > ${t("needhelp.need_help")}`} />
       <Button
         variant="ghost"
         onClick={() => navigate(-1)}
